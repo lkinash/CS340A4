@@ -18,9 +18,9 @@ class Queue{
 public:
     Queue();
     
-    PuzzleNode *getFront();
+    PuzzleNode getFront();
     void pop();
-    void push(PuzzleNode *node);
+    void push(PuzzleNode node);
     
 private:
     PuzzleNode array[1000];

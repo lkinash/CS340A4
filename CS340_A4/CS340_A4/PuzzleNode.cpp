@@ -347,3 +347,19 @@ int PuzzleNode::getSeq(){
 int PuzzleNode::getTotdist(){
     return totdist;
 }
+
+void PuzzleNode::setDepth(int newDepth){
+    depth = newDepth;
+}
+
+int PuzzleNode::getDepth(){
+    return depth;
+}
+
+void PuzzleNode::setLastMove(int move){
+    lastMove = move;
+}
+
+int PuzzleNode::getLastMove(){
+    return lastMove;
+}

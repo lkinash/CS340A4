@@ -61,11 +61,17 @@ public:
     void setHole();
     void setHole(int i, int j);
     
+    void setDepth(int newDepth);
+    int getDepth();
+    void setLastMove(int move);
+    int getLastMove();
+    
 private:
     int puzzle [PUZZLE_SIZE][PUZZLE_SIZE];
     int H, seq, totdist;
     int holeI, holeJ;
     int lastMove;
+    int depth;
     PuzzleNode *parent;
     
 };
