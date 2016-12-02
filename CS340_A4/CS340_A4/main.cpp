@@ -13,11 +13,15 @@ using namespace std;
 
 int main() {
 
-    PuzzleNode node = *new PuzzleNode();
+    //PuzzleNode node = *new PuzzleNode();
     
-    node.printPuzzle();
-    node.calcTotdist();
-    node.calcSeq();
+    //node.printPuzzle();
+    //node.calcTotdist();
+    //node.calcSeq();
+    
+    Solver solver = *new Solver();
+    
+    solver.buildUserPuzzle();
     
     return 0;
 }

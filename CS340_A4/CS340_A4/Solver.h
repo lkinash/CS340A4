@@ -24,6 +24,7 @@ public:
     
     void takeUserInput();
     void buildUserPuzzle();
+    void userPromptBestFirst();
     
 private:
     int userPuzzle [PUZZLE_SIZE][PUZZLE_SIZE];
