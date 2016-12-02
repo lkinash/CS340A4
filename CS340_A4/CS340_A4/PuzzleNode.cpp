@@ -180,6 +180,94 @@ int PuzzleNode::getHomeY(int num){
     }
 }
 
+bool PuzzleNode::isSolved(){
+ 
+    calcH();
+    calcSeq();
+    calcTotdist();
+    
+    if((H + totdist + seq) == 0 )
+        return true;
+
+    else
+        return false;
+    
+}
+
+
+void PuzzleNode::moveHoleUp(){
+
+    if(holeI <= 0)
+        throw OutOfBounds();
+    
+    swap(holeI, holeJ, (holeI - 1), holeJ);
+    setHole(holeI - 1, holeJ);
+}
+
+void PuzzleNode::moveHoleDown(){
+    
+    if(holeI >= 2)
+        throw OutOfBounds();
+    
+    swap(holeI, holeJ, (holeI + 1), holeJ);
+    setHole(holeI + 1, holeJ);
+}
+
+void PuzzleNode::moveHoleLeft(){
+    
+    if(holeJ <= 0)
+        throw OutOfBounds();
+    
+    swap(holeI, holeJ, holeI, (holeJ - 1));
+    setHole(holeI , holeJ - 1);
+
+}
+
+void PuzzleNode::moveHoleRight(){
+    
+    if(holeJ >= 2)
+        throw OutOfBounds();
+    
+    swap(holeI, holeJ, holeI, (holeJ + 1));
+    
+    setHole(holeI , holeJ + 1);
+
+}
+
+int PuzzleNode::findHoleI(){
+    
+    for(int i = 0; i < PUZZLE_SIZE; i++)
+        for(int j = 0; j < PUZZLE_SIZE; j++)
+            if(puzzle[i][j] == 0)
+                return i;
+    
+    return 0;
+}
+
+int PuzzleNode::findHoleJ(){
+    
+    for(int i = 0; i < PUZZLE_SIZE; i++)
+        for(int j = 0; j < PUZZLE_SIZE; j++)
+            if(puzzle[i][j] == 0)
+                return j;
+    
+    return 0;
+}
+
+void PuzzleNode::setHole(){
+ 
+    holeI = findHoleI();
+    holeJ = findHoleJ();
+    
+}
+
+void PuzzleNode::setHole(int i, int j){
+    
+    holeI = i;
+    holeJ = j;
+    
+}
+
 void PuzzleNode::printPuzzle(){
     
     cout << "|-----------|" << endl ;
@@ -195,7 +283,14 @@ void PuzzleNode::printPuzzle(){
         
         cout << endl << "|-----------|" << endl ;
     }
+    cout << endl;
     
+}
+
+void PuzzleNode::swap(int i1, int j1, int i2, int j2){
+    int temp = puzzle[i1][j1];
+    puzzle[i1][j1] = puzzle[i2][j2];
+    puzzle[i2][j2] = temp;
 }
 
 void PuzzleNode::setSquare(int i, int j, int value){

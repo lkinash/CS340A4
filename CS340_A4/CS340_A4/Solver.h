@@ -27,7 +27,10 @@ public:
     void userPromptBestFirst();
     
 private:
-    int userPuzzle [PUZZLE_SIZE][PUZZLE_SIZE];
+    PuzzleNode puzzle;
+    PuzzleNode next;
+    PuzzleNode userPuzzle;
+    PuzzleNode solved;
     
 };
 

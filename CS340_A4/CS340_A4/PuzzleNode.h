@@ -43,11 +43,24 @@ public:
     
     void printPuzzle();
     
+    void swap(int i1, int j1, int i2, int j2);
+    bool isSolved();
+    
+    void moveHoleUp();
+    void moveHoleDown();
+    void moveHoleLeft();
+    void moveHoleRight();
+    
+    int findHoleI();
+    int findHoleJ();
+    void setHole();
+    void setHole(int i, int j);
+    
 private:
     int puzzle [PUZZLE_SIZE][PUZZLE_SIZE];
-    int H;
-    int seq;
-    int totdist;
+    int H, seq, totdist;
+    int holeI, holeJ;
+    PuzzleNode *parent;
     
 };
 
