@@ -194,43 +194,78 @@ bool PuzzleNode::isSolved(){
     
 }
 
+bool PuzzleNode::canMoveHoleUp(){
+    
+    if(holeI <= 0)
+        return false;
+    else
+        return true;
+}
+
+bool PuzzleNode::canMoveHoleDown(){
+
+    if(holeI >= 2)
+        return false;
+    else
+        return true;
+}
+
+bool PuzzleNode::canMoveHoleLeft(){
+    
+    if(holeJ <= 0)
+        return false;
+    else
+        return true;
+}
+
+bool PuzzleNode::canMoveHoleRight(){
+    
+    if(holeJ >= 2)
+        return false;
+    else
+        return true;
+}
 
 void PuzzleNode::moveHoleUp(){
 
-    if(holeI <= 0)
+    if(canMoveHoleUp())
         throw OutOfBounds();
     
     swap(holeI, holeJ, (holeI - 1), holeJ);
     setHole(holeI - 1, holeJ);
+    lastMove = 90;
 }
 
 void PuzzleNode::moveHoleDown(){
     
-    if(holeI >= 2)
+    if(canMoveHoleDown())
         throw OutOfBounds();
     
     swap(holeI, holeJ, (holeI + 1), holeJ);
     setHole(holeI + 1, holeJ);
+    lastMove = 270;
 }
 
 void PuzzleNode::moveHoleLeft(){
     
-    if(holeJ <= 0)
+    if(canMoveHoleLeft())
         throw OutOfBounds();
     
     swap(holeI, holeJ, holeI, (holeJ - 1));
     setHole(holeI , holeJ - 1);
+    lastMove = 180;
 
 }
 
 void PuzzleNode::moveHoleRight(){
     
-    if(holeJ >= 2)
+    if(canMoveHoleRight())
         throw OutOfBounds();
     
     swap(holeI, holeJ, holeI, (holeJ + 1));
     
     setHole(holeI , holeJ + 1);
+    lastMove = 0;
 
 }
 

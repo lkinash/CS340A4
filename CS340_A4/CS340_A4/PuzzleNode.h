@@ -51,6 +51,11 @@ public:
     void moveHoleLeft();
     void moveHoleRight();
     
+    bool canMoveHoleUp();
+    bool canMoveHoleDown();
+    bool canMoveHoleLeft();
+    bool canMoveHoleRight();
+    
     int findHoleI();
     int findHoleJ();
     void setHole();
@@ -60,6 +65,7 @@ private:
     int puzzle [PUZZLE_SIZE][PUZZLE_SIZE];
     int H, seq, totdist;
     int holeI, holeJ;
+    int lastMove;
     PuzzleNode *parent;
     
 };

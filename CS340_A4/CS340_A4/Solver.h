@@ -10,6 +10,8 @@
 #define Solver_h
 
 #include "PuzzleNode.h"
+#include "Stack.h"
+#include "Queue.h"
 
 class Solver{
     
