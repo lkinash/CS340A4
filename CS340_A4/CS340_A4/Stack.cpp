@@ -22,6 +22,10 @@ PuzzleNode Stack::getTop(){
     return array[top];
 }
 
+int Stack::getTopIndex(){             //returns the index of the top of the stack
+    return top;
+}
+
 void Stack::pop(){
     top--;
 }

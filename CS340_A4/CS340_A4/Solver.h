@@ -20,9 +20,15 @@ public:
     
     void depthFirstSearch();
     void breathFirstSearch();
+    
     void depthNumberTiles();
+    void depthNumberTilesPusher();
+    
     void depthMinimumMoves();
+    void depthMinimumMovesPusher();
+    
     void depthH();
+    void depthHPusher();
     
     void takeUserInput();
     void buildUserPuzzle();
@@ -35,6 +41,7 @@ private:
     PuzzleNode array[1000];
     PuzzleNode next;
     PuzzleNode puzzle;
+    PuzzleNode best;
     PuzzleNode userPuzzle;
     PuzzleNode solved;
     Stack stack;

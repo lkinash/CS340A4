@@ -10,7 +10,7 @@
 #include "PuzzleNode.h"
 
 PuzzleNode::PuzzleNode(){
-    
+    /*
     puzzle[0][0] = 1;
     puzzle[0][1] = 3;
     puzzle[0][2] = 4;
@@ -22,6 +22,19 @@ PuzzleNode::PuzzleNode(){
     puzzle[2][0] = 7;
     puzzle[2][1] = 6;
     puzzle[2][2] = 5;
+    */
+    
+    puzzle[0][0] = 2;
+    puzzle[0][1] = 1;
+    puzzle[0][2] = 6;
+    
+    puzzle[1][0] = 4;
+    puzzle[1][1] = 0;
+    puzzle[1][2] = 8;
+    
+    puzzle[2][0] = 7;
+    puzzle[2][1] = 5;
+    puzzle[2][2] = 3;
     
     H = 0;
     totdist = 0;
@@ -34,6 +47,9 @@ PuzzleNode::PuzzleNode(){
     upChild = -1;
     downChild = -1;
     childCount = 0;
+    tilesOutOfPlace = -1;
+    minMovesToGoal = -1;
+    
 }
 
 void PuzzleNode::calcH(){
@@ -330,89 +346,132 @@ void PuzzleNode::printPuzzle(){
     
 }
 
-void PuzzleNode::swap(int i1, int j1, int i2, int j2){
+void PuzzleNode::calcTilesOutOfPlace(){
+    
+    int total = 0;
+    
+    for(int i = 0; i < PUZZLE_SIZE; i++){
+        for(int j = 0; j < PUZZLE_SIZE; j++){
+            if(puzzle[i][j] != 0){
+                if(getDisFromHome(i, j) > 0)
+                    total++;
+            }
+        }
+    }
+    
+    tilesOutOfPlace = total;
+    
+    cout << "Tiles out of Place: " << total << endl;
+    
+}
+
+void PuzzleNode::calcMinMovesToGoal(){
+ 
+    int total = 0;
+    
+    for(int i = 0; i < PUZZLE_SIZE; i++){
+        for(int j = 0; j < PUZZLE_SIZE; j++){
+            if(puzzle[i][j] != 0)
+                total += getDisFromHome(i, j);
+        }
+    }
+    
+    minMovesToGoal = total;
+    
+    cout << "Min Moves: " << total << endl;
+}
+
+void PuzzleNode::swap(int i1, int j1, int i2, int j2){          //function that swaps the values in two squares of the puzzle
     int temp = puzzle[i1][j1];
-    puzzle[i1][j1] = puzzle[i2][j2];
+    puzzle[i1][j1] = puzzle[i2][j2];                    //a temporary value is used to switch the two tiles in the puzzle
     puzzle[i2][j2] = temp;
 }
 
-void PuzzleNode::setSquare(int i, int j, int value){
+void PuzzleNode::setSquare(int i, int j, int value){                   //a setter for a square in the puzzle
     puzzle[i][j] = value;
 }
 
-int PuzzleNode::getSquare(int i, int j){
+int PuzzleNode::getSquare(int i, int j){                   //a getter for the value of a square
     return puzzle[i][j];
 }
 
-int PuzzleNode::getH(){
+int PuzzleNode::getTilesOutOfPlace(){                   //a getter for the tiles out of place variable
+    return tilesOutOfPlace;
+}
+
+int PuzzleNode::getMinMovesToGoal(){                   //a getter for the min moves to goal variable
+    return minMovesToGoal;
+}
+
+int PuzzleNode::getH(){                   //a getter for the H variable
     return H;
 }
 
-int PuzzleNode::getSeq(){
+int PuzzleNode::getSeq(){                   //a getter for the sequence variable
     return seq;
 }
 
-int PuzzleNode::getTotdist(){
+int PuzzleNode::getTotdist(){                   //a getter for the total distance variable
     return totdist;
 }
 
-void PuzzleNode::setDepth(int newDepth){
+void PuzzleNode::setDepth(int newDepth){                   //a setter for the depth variable
     depth = newDepth;
 }
 
-int PuzzleNode::getDepth(){
+int PuzzleNode::getDepth(){                   //a getter for the depth variable
     return depth;
 }
 
-void PuzzleNode::setLastMove(int move){
+void PuzzleNode::setLastMove(int move){                   //a setter for the last move variable
     lastMove = move;
 }
 
-int PuzzleNode::getLastMove(){
+int PuzzleNode::getLastMove(){                   //a getter for the last move variable
     return lastMove;
 }
 
-void PuzzleNode::setParent(int newParent){
+void PuzzleNode::setParent(int newParent){                   //a setter for the parent variable
     parent = newParent;
 }
 
-int PuzzleNode::getParent(){
+int PuzzleNode::getParent(){                   //a getter for the parent variable
     return parent;
 }
 
-void PuzzleNode::setLeftChild(int newLeftChild){
+void PuzzleNode::setLeftChild(int newLeftChild){                   //a getter for the left child variable
     leftChild = newLeftChild;
 }
 
-int PuzzleNode::getLeftChild(){
+int PuzzleNode::getLeftChild(){                   //a setter for the left child variable
     return leftChild;
 }
 
-void PuzzleNode::setRightChild(int newRightChild){
+void PuzzleNode::setRightChild(int newRightChild){                   //a setter for the right child variable
     rightChild = newRightChild;
 }
 
-int PuzzleNode::getRightChild(){
+int PuzzleNode::getRightChild(){                   //a getter for the right child variable
     return upChild;
 }
 
-void PuzzleNode::setDownChild(int newDownChild){
+void PuzzleNode::setDownChild(int newDownChild){                   //a setter for the down child variable
     downChild = newDownChild;
 }
 
-int PuzzleNode::getDownChild(){
+int PuzzleNode::getDownChild(){                   //a getter for the down child variable
     return downChild;
 }
 
-void PuzzleNode::setUpChild(int newUpChild){
+void PuzzleNode::setUpChild(int newUpChild){              //a setter for the Up child variable
     upChild = newUpChild;
 }
 
-int PuzzleNode::getUpChild(){
+int PuzzleNode::getUpChild(){                     //a getter for the Up child variable
     return upChild;
 }
 
-void PuzzleNode::incrementChildCount(){
+void PuzzleNode::incrementChildCount(){       //increments the child count for that puzzle node
     childCount++;
 }
 

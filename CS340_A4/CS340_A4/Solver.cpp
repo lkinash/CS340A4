@@ -46,9 +46,6 @@ void Solver::depthFirstSearch(){
     }
     
     
-    
-    
-    
     if(puzzle.canMoveHoleLeft() && ((puzzle.getLastMove() != 0) || (puzzle.getLastMove() == -1)))
     {
         stack.push(puzzle);
@@ -137,6 +134,195 @@ void Solver::queueAllChildren(){
 }
 
 void Solver::depthNumberTiles(){
+ 
+    stack.push(array[currentPuzzleIndex]);
+ 
+    while(stack.getTopIndex() >= 0){
+    
+        depthNumberTilesPusher();
+    
+        currentPuzzleIndex = tempIndex;
+    
+        stack.getTop().printPuzzle();
+        
+        if(stack.getTop().isSolved()){
+            solved = stack.getTop();
+        }
+    }
+}
+
+void Solver::depthNumberTilesPusher(){
+    
+    if((array[currentPuzzleIndex].canMoveHoleUp()) && ((array[currentPuzzleIndex].getLastMove() != 270)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleUp();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        array[currentPuzzleIndex].setUpChild(tempIndex);
+        array[currentPuzzleIndex].incrementChildCount();
+    }
+    
+    if((array[currentPuzzleIndex].canMoveHoleDown()) && ((array[currentPuzzleIndex].getLastMove() != 90)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleDown();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        array[currentPuzzleIndex].setDownChild(tempIndex);
+        array[currentPuzzleIndex].incrementChildCount();
+    }
+    
+    if((array[currentPuzzleIndex].canMoveHoleLeft()) && ((array[currentPuzzleIndex].getLastMove() != 180)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleLeft();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        array[currentPuzzleIndex].setLeftChild(tempIndex);
+        array[currentPuzzleIndex].incrementChildCount();
+    }
+    
+    if((array[currentPuzzleIndex].canMoveHoleRight()) && ((array[currentPuzzleIndex].getLastMove() != 0)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleRight();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        array[currentPuzzleIndex].setRightChild(tempIndex);
+        array[currentPuzzleIndex].incrementChildCount();
+    }
+    
+    stack.getTop().calcTilesOutOfPlace();
+    
+    int up = -1, down = -1, left = -1, right = -1, stackValue =  stack.getTop().getTilesOutOfPlace();
+    
+    if(array[currentPuzzleIndex].getUpChild() != -1){
+        array[array[currentPuzzleIndex].getUpChild()].calcTilesOutOfPlace();
+        up = array[array[currentPuzzleIndex].getUpChild()].getTilesOutOfPlace();
+    }
+    
+    if(array[currentPuzzleIndex].getDownChild() != -1){
+        array[array[currentPuzzleIndex].getDownChild()].calcTilesOutOfPlace();
+        down = array[array[currentPuzzleIndex].getDownChild()].getTilesOutOfPlace();
+    }
+    
+    if(array[currentPuzzleIndex].getRightChild() != -1){
+        array[array[currentPuzzleIndex].getRightChild()].calcTilesOutOfPlace();
+        right = array[array[currentPuzzleIndex].getRightChild()].getTilesOutOfPlace();
+    }
+    
+    if(array[currentPuzzleIndex].getLeftChild() != -1){
+        array[array[currentPuzzleIndex].getLeftChild()].calcTilesOutOfPlace();
+        left = array[array[currentPuzzleIndex].getLeftChild()].getTilesOutOfPlace();
+    }
+    
+    if(stackValue < up && stackValue < down && stackValue < left && stackValue < right)
+        return;
+    
+    else if(up >= down && up >= left && up >= right){
+        stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+        if(down >= left && down >= right){
+            stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            if(left >= right)
+                stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+        }
+        else if(left >= down && left >= right){
+            stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+            if(down >= right)
+                stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+        }
+        else if(right >= down && right >= left){
+            stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+            if(down >= left)
+                stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+        }
+    }
+            
+    else if(down >= up && down >= left && down >= right){
+        stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+        if(up >= left && up >= right){
+            stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+            if(left >= right)
+                stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+        }
+        else if(left >= up && left >= right){
+            stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+            if(up >= right)
+                stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+        }
+        else if(right >= up && right >= left){
+            stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+            if(up >= left)
+                stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+        }
+    }
+    
+    else if(right >= down && right >= left && right >= up){
+        stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+        if(down >= left && down >= up){
+            stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            if(left >= up)
+                stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+        }
+        else if(left >= down && left >= up){
+            stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+            if(down >= up)
+                stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+        }
+        else if(up >= down && up >= left){
+            stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+            if(down >= left)
+                stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+        }
+    }
+    
+    else if(left >= down && left >= up && left >= right){
+        stack.push(array[array[currentPuzzleIndex].getLeftChild()]);
+        if(down >= up && down >= right){
+            stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            if(up >= right)
+                stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+        }
+        else if(up >= down && up >= right){
+            stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+            if(down >= right)
+                stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+        }
+        else if(right >= down && right >= up){
+            stack.push(array[array[currentPuzzleIndex].getRightChild()]);
+            if(down >= up)
+                stack.push(array[array[currentPuzzleIndex].getDownChild()]);
+            else
+                stack.push(array[array[currentPuzzleIndex].getUpChild()]);
+        }
+    }
+    
+    
+    
     
 }
 
@@ -144,8 +330,84 @@ void Solver::depthMinimumMoves(){
     
 }
 
+void depthMinimumMoves(){
+    
+}
+
 void Solver::depthH(){
     
+    stack.push(puzzle);
+    
+    while(1){
+        
+        depthHPusher();
+        
+        puzzle = stack.getTop();
+        stack.pop();
+        
+        puzzle.printPuzzle();
+        
+        if(puzzle.isSolved()){
+            solved = puzzle;
+            return;
+        }
+    }
+    
+}
+
+void Solver::depthHPusher(){
+ 
+    int bestH = 10000;
+    
+    if((puzzle.canMoveHoleUp()) && ((puzzle.getLastMove() != 270)||(puzzle.getLastMove() == -1))){
+    
+        next = puzzle;
+        next.moveHoleUp();
+        next.calcH();
+        
+        if(next.getH() < bestH){
+            best = next;
+            bestH = next.getH();
+        }
+    }
+    
+    if((puzzle.canMoveHoleDown()) && ((puzzle.getLastMove() != 90)||(puzzle.getLastMove() == -1))){
+        
+        next = puzzle;
+        next.moveHoleDown();
+        next.calcH();
+        
+        if(next.getH() < bestH){
+            best = next;
+            bestH = next.getH();
+        }
+    }
+    
+    if((puzzle.canMoveHoleLeft()) && ((puzzle.getLastMove() != 180)||(puzzle.getLastMove() == -1))){
+        
+        next = puzzle;
+        next.moveHoleLeft();
+        next.calcH();
+        
+        if(next.getH() < bestH){
+            best = next;
+            bestH = next.getH();
+        }
+    }
+    
+    if((puzzle.canMoveHoleRight()) && ((puzzle.getLastMove() != 0)||(puzzle.getLastMove() == -1))){
+        
+        next = puzzle;
+        next.moveHoleRight();
+        next.calcH();
+        
+        if(next.getH() < bestH){
+            best = next;
+            bestH = next.getH();
+        }
+    }
+   
+    stack.push(best);
 }
 
 void Solver::printSolved(){

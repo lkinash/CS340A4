@@ -9,36 +9,34 @@
 #include <stdio.h>
 #include "Queue.h"
 
-Queue::Queue(){
-    front = -1;
+Queue::Queue(){         //a constructor for the queue
+    front = -1;             //set the front at 0 when the queue is created
 }
 
 PuzzleNode Queue::getFront(){
     
     if(front < 0)
-        throw EmptyQueue();
+        throw EmptyQueue();         // if the queue is trying to be accessed but is empty throw an error 
     
-    return array[front];
+    return array[front];            //returns the first node in the queue
 }
 
-void Queue::pop(){
-    front--;
+void Queue::pop(){      //pops the front node off the queue
+    front--;            //decrement number of nodes in the queue
 }
 
-void Queue::push(PuzzleNode node){
+void Queue::push(PuzzleNode node){      //pushes a node into the queue
  
-    front++;
+    front++;                        //increments the number of nodes in the queue
     
     if(front > 0){
-        for(int i = front; i > 0; i--)
+        for(int i = front; i > 0; i--)          //cycle through the queue moving each node forward one
             array[i] = array[i-1];
     }
     
-    array[0] = node;
+    array[0] = node;            //adds the new node as the first node in the array
 }
 
 int Queue::getFrontIndex(){
-    cout << "Front: " << front << endl;
-    
-    return front;
+    return front;                     //returns the index of the front of the queue
 }

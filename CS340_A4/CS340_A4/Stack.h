@@ -11,7 +11,7 @@
 
 #include "PuzzleNode.h"
 
-class EmptyStack{};
+class EmptyStack{};         //class to throw exceptions of
 
 class Stack{
   
@@ -21,6 +21,7 @@ public:
     PuzzleNode getTop();
     void pop();
     void push(PuzzleNode node);
+    int getTopIndex();
     
 private:
     PuzzleNode array[1000];

@@ -21,16 +21,17 @@ int main() {
  
     
     
-    //node.calcTotdist();
-    //node.calcSeq();
-    
     Solver solver = *new Solver();
     
     //solver.buildUserPuzzle();
     
     //solver.breathFirstSearch();
     
-    solver.depthFirstSearch();
+    //solver.depthFirstSearch();
+    
+    //solver.depthNumberTiles();
+    
+    solver.depthH();
     
     solver.printSolved();
     

@@ -11,22 +11,22 @@
 
 #include "PuzzleNode.h"
 
-class EmptyQueue{};
+class EmptyQueue{};         //class to throw exceptions of
 
-class Queue{
+class Queue{            //the queue clas
     
 public:
-    Queue();
+    Queue();                //a constructor for the queue
     
-    PuzzleNode getFront();
-    void pop();
-    void push(PuzzleNode node);
+    PuzzleNode getFront();          //gets the front node
+    void pop();                     //pops the front node off the queue
+    void push(PuzzleNode node);     //pushes a node into the queue
     
-    int getFrontIndex();
+    int getFrontIndex();                //gets the number of nodes in the queue
     
 private:
-    PuzzleNode array[3000];
-    int front;
+    PuzzleNode array[3000];         //the queue is an array of puzzle nodes
+    int front;                  //front tracks the nodes in the queue
 };
 
 
