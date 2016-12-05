@@ -26,6 +26,14 @@ PuzzleNode::PuzzleNode(){
     H = 0;
     totdist = 0;
     seq = 0;
+    lastMove = -1;
+    depth = 0;
+    parent = -1;
+    leftChild = -1;
+    rightChild = -1;
+    upChild = -1;
+    downChild = -1;
+    childCount = 0;
 }
 
 void PuzzleNode::calcH(){
@@ -228,7 +236,7 @@ bool PuzzleNode::canMoveHoleRight(){
 
 void PuzzleNode::moveHoleUp(){
 
-    if(canMoveHoleUp())
+    if(!canMoveHoleUp())
         throw OutOfBounds();
     
     swap(holeI, holeJ, (holeI - 1), holeJ);
@@ -238,7 +246,7 @@ void PuzzleNode::moveHoleUp(){
 
 void PuzzleNode::moveHoleDown(){
     
-    if(canMoveHoleDown())
+    if(!canMoveHoleDown())
         throw OutOfBounds();
     
     swap(holeI, holeJ, (holeI + 1), holeJ);
@@ -248,7 +256,7 @@ void PuzzleNode::moveHoleDown(){
 
 void PuzzleNode::moveHoleLeft(){
     
-    if(canMoveHoleLeft())
+    if(!canMoveHoleLeft())
         throw OutOfBounds();
     
     swap(holeI, holeJ, holeI, (holeJ - 1));
@@ -259,7 +267,7 @@ void PuzzleNode::moveHoleLeft(){
 
 void PuzzleNode::moveHoleRight(){
     
-    if(canMoveHoleRight())
+    if(!canMoveHoleRight())
         throw OutOfBounds();
     
     swap(holeI, holeJ, holeI, (holeJ + 1));
@@ -363,3 +371,48 @@ void PuzzleNode::setLastMove(int move){
 int PuzzleNode::getLastMove(){
     return lastMove;
 }
+
+void PuzzleNode::setParent(int newParent){
+    parent = newParent;
+}
+
+int PuzzleNode::getParent(){
+    return parent;
+}
+
+void PuzzleNode::setLeftChild(int newLeftChild){
+    leftChild = newLeftChild;
+}
+
+int PuzzleNode::getLeftChild(){
+    return leftChild;
+}
+
+void PuzzleNode::setRightChild(int newRightChild){
+    rightChild = newRightChild;
+}
+
+int PuzzleNode::getRightChild(){
+    return upChild;
+}
+
+void PuzzleNode::setDownChild(int newDownChild){
+    downChild = newDownChild;
+}
+
+int PuzzleNode::getDownChild(){
+    return downChild;
+}
+
+void PuzzleNode::setUpChild(int newUpChild){
+    upChild = newUpChild;
+}
+
+int PuzzleNode::getUpChild(){
+    return upChild;
+}
+
+void PuzzleNode::incrementChildCount(){
+    childCount++;
+}
+

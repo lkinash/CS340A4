@@ -22,8 +22,10 @@ public:
     void pop();
     void push(PuzzleNode node);
     
+    int getFrontIndex();
+    
 private:
-    PuzzleNode array[1000];
+    PuzzleNode array[3000];
     int front;
 };
 

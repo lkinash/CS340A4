@@ -65,6 +65,23 @@ public:
     int getDepth();
     void setLastMove(int move);
     int getLastMove();
+
+    void setParent(int newParent);
+    int getParent();
+    
+    void setLeftChild(int newLeftChild);
+    int getLeftChild();
+    
+    void setRightChild(int newRightChild);
+    int getRightChild();
+  
+    void setDownChild(int newDownChild);
+    int getDownChild();
+    
+    void setUpChild(int newUpChild);
+    int getUpChild();
+    
+    void incrementChildCount();
     
 private:
     int puzzle [PUZZLE_SIZE][PUZZLE_SIZE];
@@ -72,7 +89,9 @@ private:
     int holeI, holeJ;
     int lastMove;
     int depth;
-    PuzzleNode *parent;
+    int parent, childCount;
+    int leftChild, rightChild, upChild, downChild;
+   
     
 };
 

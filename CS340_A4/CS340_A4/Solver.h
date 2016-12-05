@@ -28,12 +28,20 @@ public:
     void buildUserPuzzle();
     void userPromptBestFirst();
     
+    void printSolved();
+    void queueAllChildren();
+    
 private:
-    PuzzleNode puzzle;
+    PuzzleNode array[1000];
     PuzzleNode next;
+    PuzzleNode puzzle;
     PuzzleNode userPuzzle;
     PuzzleNode solved;
+    Stack stack;
+    Queue queue;
     
+    int currentPuzzleIndex;
+    int tempIndex;
 };
 
 #endif /* Solver_h */

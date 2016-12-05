@@ -28,8 +28,17 @@ void Queue::pop(){
 void Queue::push(PuzzleNode node){
  
     front++;
-    for(int i = front; i > 0; i++)
-        array[i] = array[i-1];
+    
+    if(front > 0){
+        for(int i = front; i > 0; i--)
+            array[i] = array[i-1];
+    }
     
     array[0] = node;
+}
+
+int Queue::getFrontIndex(){
+    cout << "Front: " << front << endl;
+    
+    return front;
 }

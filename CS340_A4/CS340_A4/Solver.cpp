@@ -26,6 +26,16 @@ Solver::Solver(){
     userPuzzle.setSquare(2, 1, 6);
     userPuzzle.setSquare(2, 2, 5);
     
+    puzzle = userPuzzle;
+    puzzle.setHole();
+    
+    currentPuzzleIndex = 0;
+    
+    array[currentPuzzleIndex] = puzzle;
+    
+    array[currentPuzzleIndex].setHole();
+    
+    tempIndex = 0;
 }
 
 void Solver::depthFirstSearch(){
@@ -36,13 +46,94 @@ void Solver::depthFirstSearch(){
     }
     
     
-        
+    
+    
+    
+    if(puzzle.canMoveHoleLeft() && ((puzzle.getLastMove() != 0) || (puzzle.getLastMove() == -1)))
+    {
+        stack.push(puzzle);
+        puzzle.moveHoleLeft();
+        puzzle.setDepth((puzzle.getDepth() + 1));
+        puzzle.printPuzzle();
+        depthFirstSearch();
+        puzzle = stack.getTop();
+        stack.pop();
+    }
+    
     
 }
 
 void Solver::breathFirstSearch(){
  
     
+    queue.push(array[currentPuzzleIndex]);
+    
+    while(queue.getFrontIndex() >= 0){
+    
+        if(queue.getFront().isSolved()){
+            solved = queue.getFront();
+            return;
+        }
+      
+        queue.getFront().printPuzzle();
+        
+        queue.pop();
+        
+        currentPuzzleIndex++;
+        
+        queueAllChildren();
+        
+    }
+    
+    
+}
+
+void Solver::queueAllChildren(){
+    
+    if((array[currentPuzzleIndex].canMoveHoleUp()) && ((array[currentPuzzleIndex].getLastMove() != 270)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleUp();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        array[currentPuzzleIndex].setUpChild(tempIndex);
+        array[currentPuzzleIndex].incrementChildCount();
+        queue.push(array[tempIndex]);
+    }
+    
+    if((array[currentPuzzleIndex].canMoveHoleDown()) && ((array[currentPuzzleIndex].getLastMove() != 90)||(array[currentPuzzleIndex].getLastMove() == -1))){
+
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleDown();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        array[currentPuzzleIndex].setDownChild(tempIndex);
+        array[currentPuzzleIndex].incrementChildCount();
+        queue.push(array[tempIndex]);
+    }
+    
+    if((array[currentPuzzleIndex].canMoveHoleLeft()) && ((array[currentPuzzleIndex].getLastMove() != 180)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleLeft();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        array[currentPuzzleIndex].setLeftChild(tempIndex);
+        array[currentPuzzleIndex].incrementChildCount();
+        queue.push(array[tempIndex]);
+    }
+    
+    if((array[currentPuzzleIndex].canMoveHoleRight()) && ((array[currentPuzzleIndex].getLastMove() != 0)||(array[currentPuzzleIndex].getLastMove() == -1))){
+
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleRight();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        array[currentPuzzleIndex].setRightChild(tempIndex);
+        array[currentPuzzleIndex].incrementChildCount();
+        queue.push(array[tempIndex]);
+    }
 }
 
 void Solver::depthNumberTiles(){
@@ -55,6 +146,11 @@ void Solver::depthMinimumMoves(){
 
 void Solver::depthH(){
     
+}
+
+void Solver::printSolved(){
+    
+    solved.printPuzzle();
 }
 
 void Solver::takeUserInput(){
