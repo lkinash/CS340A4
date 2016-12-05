@@ -79,10 +79,7 @@ void Solver::breathFirstSearch(){
         currentPuzzleIndex++;
         
         queueAllChildren();
-        
     }
-    
-    
 }
 
 void Solver::queueAllChildren(){
@@ -410,9 +407,9 @@ void Solver::depthHPusher(){
     stack.push(best);
 }
 
-void Solver::printSolved(){
+void Solver::printSolved(){         //prints the puzzle that is set as solved to test if it is solved
     
-    solved.printPuzzle();
+    solved.printPuzzle();           //calls the print function for the solved node
 }
 
 void Solver::takeUserInput(){
@@ -446,7 +443,6 @@ void Solver::takeUserInput(){
         }
     }
     return;
-    
 }
 
 void Solver::userPromptBestFirst(){
@@ -478,9 +474,7 @@ void Solver::userPromptBestFirst(){
             depthH();
             break;
         }
-        
     }
-    
 }
 
 void Solver::buildUserPuzzle(){
@@ -514,17 +508,12 @@ void Solver::buildUserPuzzle(){
                     break;
                 }
             }
-            
         }
     }
-    
     cout << "The following is the puzzle you entered: " << endl;
     userNode.printPuzzle();
 
     //takeUserInput();
-    
 }
-
-
 
 

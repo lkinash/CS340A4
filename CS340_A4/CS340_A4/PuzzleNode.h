@@ -23,47 +23,47 @@ class PuzzleNode{               //the puzzle node class
 public:
     PuzzleNode();                   //a constructor function
     
-    int getH();
-    int getSeq();
-    int getTotdist();
+    int getH();                     //a getter for the H variable
+    int getSeq();            //a getter for the seq variable
+    int getTotdist();            //a getter for the total distance variable
     
-    void calcH();
-    void calcSeq();
-    void calcTotdist();
+    void calcH();                          //a calculator function for the H value
+    void calcSeq();                    //a calculator function for the seq value
+    void calcTotdist();                    //a calculator function for the total distance value
     
-    void calcTilesOutOfPlace();
-    void calcMinMovesToGoal();
+    void calcTilesOutOfPlace();                   //a calculator function for the tiles out of place value
+    void calcMinMovesToGoal();                 //a calculator function for the min moves to goal value
     
-    int getTilesOutOfPlace();
-    int getMinMovesToGoal();
+    int getTilesOutOfPlace();                           //a getter for the tiles out of place variable
+    int getMinMovesToGoal();                            //a getter for the min moves to goal variable
     
-    int calcTileSeq(int i, int j);
-    int getDisFromHome(int i, int j);
+    int calcTileSeq(int i, int j);          //a calculator function for the tile sequence value
+    int getDisFromHome(int i, int j);                     //a getter for the distance from home
 
-    int getClockNext(int i, int j);
-    int getHomeX(int num);
-    int getHomeY(int num);
+    int getClockNext(int i, int j);                   //a getter for the next clockwise value
+    int getHomeX(int num);                        //this function finds the home square in the X direction for the value passed in
+    int getHomeY(int num);                    //this function finds the home square in the Y direction for the value passed in
     
-    void setSquare(int i, int j, int value);
-    int getSquare(int i, int j);
+    void setSquare(int i, int j, int value);            //function that sets the value in a square
+    int getSquare(int i, int j);                    //function that gets the value in a square
     
-    void printPuzzle();
+    void printPuzzle();                             //function that prints the puzzle
     
     void swap(int i1, int j1, int i2, int j2);               //function that swaps the values in two squares of the puzzle
     bool isSolved();
     
-    void moveHoleUp();
-    void moveHoleDown();
-    void moveHoleLeft();
-    void moveHoleRight();
+    void moveHoleUp();                  //moves the hole up one square in the puzzle
+    void moveHoleDown();                 //moves the hole down one square in the puzzle
+    void moveHoleLeft();                 //moves the hole left one square in the puzzle
+    void moveHoleRight();                 //moves the hole right one square in the puzzle
     
-    bool canMoveHoleUp();
-    bool canMoveHoleDown();
-    bool canMoveHoleLeft();
-    bool canMoveHoleRight();
+    bool canMoveHoleUp();             //tests if the hole can be moved up or not
+    bool canMoveHoleDown();          //tests if the hole can be moved down or not
+    bool canMoveHoleLeft();          //tests if the hole can be moved left or not
+    bool canMoveHoleRight();          //tests if the hole can be moved right or not
     
-    int findHoleI();
-    int findHoleJ();
+    int findHoleI();        //finds where it whole is an returns the I value                     //a calculator function for the H value
+    int findHoleJ();           //finds where it whole is an returns the J value 
     void setHole();            //a setter for the hole variable that calculates where they are
     void setHole(int i, int j);            //a setter for the hole variable
     
