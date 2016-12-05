@@ -12,6 +12,7 @@
 		90DCE0EB1DEDF52A00783ACF /* Solver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90DCE0EA1DEDF52A00783ACF /* Solver.cpp */; };
 		90DCE0ED1DF21E5400783ACF /* Stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90DCE0EC1DF21E5400783ACF /* Stack.cpp */; };
 		90DCE0EF1DF21E6200783ACF /* Queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90DCE0EE1DF21E6200783ACF /* Queue.cpp */; };
+		90DCE0F41DF5EF0C00783ACF /* BinaryHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90DCE0F31DF5EF0C00783ACF /* BinaryHeap.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,8 @@
 		90DCE0EE1DF21E6200783ACF /* Queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Queue.cpp; sourceTree = "<group>"; };
 		90DCE0F01DF21E6D00783ACF /* Stack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		90DCE0F11DF21E7E00783ACF /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		90DCE0F21DF5D72A00783ACF /* BinaryHeap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BinaryHeap.h; sourceTree = "<group>"; };
+		90DCE0F31DF5EF0C00783ACF /* BinaryHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryHeap.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,8 @@
 				90DCE0F01DF21E6D00783ACF /* Stack.h */,
 				90DCE0EE1DF21E6200783ACF /* Queue.cpp */,
 				90DCE0F11DF21E7E00783ACF /* Queue.h */,
+				90DCE0F21DF5D72A00783ACF /* BinaryHeap.h */,
+				90DCE0F31DF5EF0C00783ACF /* BinaryHeap.cpp */,
 			);
 			path = CS340_A4;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			files = (
 				90DCE0ED1DF21E5400783ACF /* Stack.cpp in Sources */,
 				90DCE0EB1DEDF52A00783ACF /* Solver.cpp in Sources */,
+				90DCE0F41DF5EF0C00783ACF /* BinaryHeap.cpp in Sources */,
 				90DCE0E01DEDF4CA00783ACF /* main.cpp in Sources */,
 				90DCE0EF1DF21E6200783ACF /* Queue.cpp in Sources */,
 				90DCE0E71DEDF4FC00783ACF /* PuzzleNode.cpp in Sources */,

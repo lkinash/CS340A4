@@ -13,7 +13,7 @@
 using namespace std;
 
 Solver::Solver(){
-    
+    /*
     userPuzzle.setSquare(0, 0, 1);
     userPuzzle.setSquare(0, 1, 3);
     userPuzzle.setSquare(0, 2, 4);
@@ -25,7 +25,33 @@ Solver::Solver(){
     userPuzzle.setSquare(2, 0, 7);
     userPuzzle.setSquare(2, 1, 6);
     userPuzzle.setSquare(2, 2, 5);
+    */
     
+    userPuzzle.setSquare(0, 0, 2);
+    userPuzzle.setSquare(0, 1, 8);
+    userPuzzle.setSquare(0, 2, 3);
+    
+    userPuzzle.setSquare(1, 0, 1);
+    userPuzzle.setSquare(1, 1, 6);
+    userPuzzle.setSquare(1, 2, 4);
+    
+    userPuzzle.setSquare(2, 0, 7);
+    userPuzzle.setSquare(2, 1, 0);
+    userPuzzle.setSquare(2, 2, 5);
+   
+     /*
+    userPuzzle.setSquare(0, 0, 2);
+    userPuzzle.setSquare(0, 1, 1);
+    userPuzzle.setSquare(0, 2, 6);
+    
+    userPuzzle.setSquare(1, 0, 4);
+    userPuzzle.setSquare(1, 1, 0);
+    userPuzzle.setSquare(1, 2, 8);
+    
+    userPuzzle.setSquare(2, 0, 7);
+    userPuzzle.setSquare(2, 1, 5);
+    userPuzzle.setSquare(2, 2, 3);
+    */
     puzzle = userPuzzle;
     puzzle.setHole();
     
@@ -38,23 +64,116 @@ Solver::Solver(){
     tempIndex = 0;
 }
 
+void Solver::printSolvedPathLoop(int index){
+    
+    if(index == -1)
+        return;
+    
+    printSolvedPathLoop(array[index].getParent());
+    array[index].printPuzzle();
+    stepCounter++;
+    
+}
+
+void Solver::printSolvedPath(){
+    
+    stepCounter = 0;
+    
+    printSolvedPathLoop(solved.getParent());
+    printSolved();
+    
+    cout << "Puzzle solved in " << stepCounter << " steps" << endl;
+}
+
 void Solver::depthFirstSearch(){
     
-    if(puzzle.isSolved()){
-        solved = puzzle;
-        return;
+    
+    stack.push(array[currentPuzzleIndex]);
+    
+    while(stack.getTopIndex() >= 0){
+        
+        if(stack.getTop().isSolved()){
+            solved = stack.getTop();
+            return;
+        }
+        
+        stack.getTop().printPuzzle();
+        
+        stack.pop();
+        
+        stackAllChildren();
+    
+        currentPuzzleIndex++;
+    }
+}
+
+void Solver::stackAllChildren(){
+        
+    
+    if((array[currentPuzzleIndex].canMoveHoleUp()) && ((array[currentPuzzleIndex].getLastMove() != 270)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleUp();
+        array[tempIndex].setParent(currentPuzzleIndex);
+        
+        if(!alreadyExists(tempIndex)){
+            array[currentPuzzleIndex].setUpChild(tempIndex);
+            array[currentPuzzleIndex].incrementChildCount();
+            stack.push(array[tempIndex]);
+        }
+        else
+            tempIndex--;
+            
     }
     
+    if((array[currentPuzzleIndex].canMoveHoleDown()) && ((array[currentPuzzleIndex].getLastMove() != 90)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleDown();
+        array[tempIndex].setParent(currentPuzzleIndex);
+
+        if(!alreadyExists(tempIndex)){
+            array[currentPuzzleIndex].setUpChild(tempIndex);
+            array[currentPuzzleIndex].incrementChildCount();
+            stack.push(array[tempIndex]);
+        }
+        else
+            tempIndex--;
+    }
     
-    if(puzzle.canMoveHoleLeft() && ((puzzle.getLastMove() != 0) || (puzzle.getLastMove() == -1)))
-    {
-        stack.push(puzzle);
-        puzzle.moveHoleLeft();
-        puzzle.setDepth((puzzle.getDepth() + 1));
-        puzzle.printPuzzle();
-        depthFirstSearch();
-        puzzle = stack.getTop();
-        stack.pop();
+    if((array[currentPuzzleIndex].canMoveHoleLeft()) && ((array[currentPuzzleIndex].getLastMove() != 180)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleLeft();
+        array[tempIndex].setParent(currentPuzzleIndex);
+
+        if(!alreadyExists(tempIndex)){
+            array[currentPuzzleIndex].setUpChild(tempIndex);
+            array[currentPuzzleIndex].incrementChildCount();
+            stack.push(array[tempIndex]);
+        }
+        else
+            tempIndex--;
+    }
+    
+    if((array[currentPuzzleIndex].canMoveHoleRight()) && ((array[currentPuzzleIndex].getLastMove() != 0)||(array[currentPuzzleIndex].getLastMove() == -1))){
+        
+        tempIndex++;
+        array[tempIndex] = array[currentPuzzleIndex];
+        array[tempIndex].moveHoleRight();
+        array[tempIndex].setParent(currentPuzzleIndex);
+
+        if(!alreadyExists(tempIndex)){
+            array[currentPuzzleIndex].setUpChild(tempIndex);
+            array[currentPuzzleIndex].incrementChildCount();
+            stack.push(array[tempIndex]);
+        }
+        else
+            tempIndex--;
     }
     
     
@@ -76,9 +195,9 @@ void Solver::breathFirstSearch(){
         
         queue.pop();
         
-        currentPuzzleIndex++;
-        
         queueAllChildren();
+        
+        currentPuzzleIndex++;
     }
 }
 
@@ -325,6 +444,8 @@ void Solver::depthNumberTilesPusher(){
 
 void Solver::depthMinimumMoves(){
     
+    
+    
 }
 
 void depthMinimumMoves(){
@@ -405,6 +526,37 @@ void Solver::depthHPusher(){
     }
    
     stack.push(best);
+}
+
+bool Solver::alreadyExists(int index){
+    
+    int temp = array[index].getParent();
+    
+    while(1){
+        
+        temp = (array[temp].getParent());
+        
+        if(temp != -1){
+            if(arePuzzleTheSame(index, temp))
+                return true;
+        }
+        else if(temp == -1){
+            return false;
+        }
+    }
+    return false;
+}
+
+bool Solver::arePuzzleTheSame(int index1, int index2){
+    
+    for(int i = 0; i < PUZZLE_SIZE; i++){
+        for(int j = 0; j < PUZZLE_SIZE; j++){          //double nested for loops are used to go through all the squares in the puzzle
+            if(array[index1].getSquare(i, j) != array[index2].getSquare(i, j))
+                return false;
+        }
+    }
+    
+    return true;
 }
 
 void Solver::printSolved(){         //prints the puzzle that is set as solved to test if it is solved

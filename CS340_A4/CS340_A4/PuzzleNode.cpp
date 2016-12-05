@@ -27,6 +27,34 @@ PuzzleNode::PuzzleNode(){           //the constructor for the puzzle node class
     
 }
 
+void PuzzleNode::setTestValue(char newTestValue){            //a setter for the Up child variable
+    
+    if(newTestValue == 't' || newTestValue == 'h' || newTestValue == 'm')       //tests if teh new test value is a valid value
+        testValue = newTestValue;                   //test the test value if it is
+    else
+        throw Invalid();                //throws an error if not
+        
+}
+
+int PuzzleNode::getTestValue(){            //a getter for the Up child variable
+
+    if(testValue == 't'){
+        calcTilesOutOfPlace();              //tests which value the test value should return
+        return tilesOutOfPlace;             //calculates that value and returns the appropriate value based on what test value is set
+    }
+    else if(testValue == 'h'){              //tests which value the test value should return
+        calcH();
+        return H;               //calculates that value and returns the appropriate value based on what test value is set
+    }
+    else if (testValue == 'm'){                 //tests which value the test value should return
+        calcMinMovesToGoal();
+        return minMovesToGoal;              //calculates that value and returns the appropriate value based on what test value is set
+    }
+    else
+        throw Invalid();            //if the test value isnt set it throws an error
+    return -1;
+}
+
 void PuzzleNode::calcH(){                            //a calculator function for the H value
     
     H = totdist + ( 3 * seq );          //the H value is calculated and set

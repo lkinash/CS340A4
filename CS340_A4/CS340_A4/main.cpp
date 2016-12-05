@@ -31,9 +31,13 @@ int main() {
     
     //solver.depthNumberTiles();
     
-    solver.depthH();
+    //solver.depthH();
     
-    solver.printSolved();
+    //cout << "solved " << endl;
+    
+    //solver.printSolvedPath();
+    
+    
     
     return 0;
     

@@ -36,6 +36,13 @@ public:
     
     void printSolved();
     void queueAllChildren();
+    void stackAllChildren();
+    
+    bool alreadyExists(int index);
+    bool arePuzzleTheSame(int index1, int index2);
+    
+    void printSolvedPathLoop(int index);
+    void printSolvedPath();
     
 private:
     PuzzleNode array[1000];
@@ -49,6 +56,7 @@ private:
     
     int currentPuzzleIndex;
     int tempIndex;
+    int stepCounter;
 };
 
 #endif /* Solver_h */

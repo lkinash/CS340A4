@@ -15,6 +15,7 @@
 using namespace std;
 
 class OutOfBounds{};                        //an empty class for throwing errors
+class Invalid{};                        //an empty class for throwing errors
 
 const static int PUZZLE_SIZE = 3;               //the puzzle is of size 3X3
 
@@ -87,6 +88,9 @@ public:
     void setUpChild(int newUpChild);            //a setter for the Up child variable
     int getUpChild();            //a getter for the Up child variable
     
+    void setTestValue(char newTestValue);            //a setter for the test value variable
+    int getTestValue();            //a getter for the test value variable
+    
     void incrementChildCount();       //increments the child count for that puzzle node
     
 private:
@@ -99,6 +103,7 @@ private:
     int leftChild, rightChild, upChild, downChild;
     int tilesOutOfPlace;                        //the tiles out of place variable and min moves to the goal
     int minMovesToGoal;
+    char testValue;
 };
 
 #endif /* PuzzleNode_h */
