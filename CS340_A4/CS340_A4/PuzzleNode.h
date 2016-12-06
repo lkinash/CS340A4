@@ -88,6 +88,9 @@ public:
     void setUpChild(int newUpChild);            //a setter for the Up child variable
     int getUpChild();            //a getter for the Up child variable
     
+    void setIndex(int newIndex);            //a setter for the index variable
+    int getIndex();            //a getter for the index variable
+    
     void setTestValue(char newTestValue);            //a setter for the test value variable
     int getTestValue();            //a getter for the test value variable
     
@@ -104,6 +107,7 @@ private:
     int tilesOutOfPlace;                        //the tiles out of place variable and min moves to the goal
     int minMovesToGoal;
     char testValue;
+    int index;
 };
 
 #endif /* PuzzleNode_h */

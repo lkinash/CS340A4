@@ -31,11 +31,11 @@ int main() {
     
     //solver.depthNumberTiles();
     
-    //solver.depthH();
+    solver.depthH();
     
-    //cout << "solved " << endl;
+    cout << "solved " << endl;
     
-    //solver.printSolvedPath();
+    solver.printSolvedPath();
     
     
     

@@ -24,7 +24,7 @@ public:
     int getTopIndex();              //gets the number of nodes in the stack
     
 private:
-    PuzzleNode array[2000];         //an array of nodes to make up the stack
+    PuzzleNode array[3000];         //an array of nodes to make up the stack
     int top;                    //the value that knows how many there are
 };
 

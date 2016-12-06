@@ -81,8 +81,8 @@
 				90DCE0F01DF21E6D00783ACF /* Stack.h */,
 				90DCE0EE1DF21E6200783ACF /* Queue.cpp */,
 				90DCE0F11DF21E7E00783ACF /* Queue.h */,
-				90DCE0F21DF5D72A00783ACF /* BinaryHeap.h */,
 				90DCE0F31DF5EF0C00783ACF /* BinaryHeap.cpp */,
+				90DCE0F21DF5D72A00783ACF /* BinaryHeap.h */,
 			);
 			path = CS340_A4;
 			sourceTree = "<group>";

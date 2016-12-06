@@ -2,8 +2,10 @@
 //  BinaryHeap.h
 //  CS340_A4
 //
-//  Created by Lindsey Kinash on 2016-12-05.
-//  Copyright © 2016 Lindsey. All rights reserved.
+//  NOTE: THIS CODE IS NOT MY CODE, IT WAS TAKEN FROM ANOTHER SOURCE AND MODIFIED TO WORK WITH MY CODE
+//  SOURCE: https://www.codeproject.com/tips/816934/min-binary-heap-implementation-in-cplusplus
+//
+//  THAT SOURCE IS WHERE THE CODE FOR THIS CLASS CAME FROM, IT IS NOT MY CODE
 //
 
 #ifndef BinaryHeap_h
@@ -17,7 +19,7 @@ using namespace std;
 class MinHeap
 {
 private:
-    PuzzleNode heap[1000];
+    PuzzleNode heap[5000];
     int length;
     void BubbleDown(int index);
     void BubbleUp(int index);
@@ -30,6 +32,7 @@ public:
     void Insert(PuzzleNode newValue);
     PuzzleNode GetMin();
     void DeleteMin();
+    int getLength();
 };
 
 #endif /* BinaryHeap_h */

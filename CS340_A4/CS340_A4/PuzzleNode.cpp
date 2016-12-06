@@ -389,6 +389,14 @@ void PuzzleNode::incrementChildCount(){       //increments the child count for t
     childCount++;
 }
 
+void PuzzleNode::setIndex(int newIndex){           //a setter for the index variable
+    index = newIndex;
+}
+
+int PuzzleNode::getIndex(){            //a getter for the index variable
+    return index;
+}
+
 int PuzzleNode::getHomeX(int num){                 //this function finds the home square in the X direction for the value passed in
     
     if(num > 8 || num < 1)                         //checks that the number is within the limits of numbers

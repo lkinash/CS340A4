@@ -12,6 +12,7 @@
 #include "PuzzleNode.h"
 #include "Stack.h"
 #include "Queue.h"
+#include "BinaryHeap.h"
 
 class Solver{
     
@@ -45,7 +46,7 @@ public:
     void printSolvedPath();
     
 private:
-    PuzzleNode array[1000];
+    PuzzleNode array[10000];
     PuzzleNode next;
     PuzzleNode puzzle;
     PuzzleNode best;
@@ -53,6 +54,7 @@ private:
     PuzzleNode solved;
     Stack stack;
     Queue queue;
+    MinHeap heap;
     
     int currentPuzzleIndex;
     int tempIndex;
